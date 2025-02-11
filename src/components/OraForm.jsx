@@ -1,10 +1,21 @@
+import React, { useState } from 'react'
+export default function OraForm({onOraHozzaad}) {
 
-export default function OraForm() {
+  const[cim, setCim] = useState('')
+  const[leiras, setLeiras] = useState('')
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const newOra = {cim, leiras};
+    onOraHozzaad(newOra);
+    setCim('')
+    setLeiras('')
+  }
   return (
-    <form action="#">
+    <form onSubmit={handleFormSubmit}>
         <div className="col">
-            <input type="text" placeholder="Cím" />
-            <textarea placeholder="Leírás" rows="5"></textarea>
+            <input type="text" placeholder="Cím" value={cim} onChange={(e) => setCim(e.target.value)} />
+            <textarea placeholder="Leírás" rows="5" value={leiras} onChange={(e) => setLeiras(e.target.value)}></textarea>
         </div>
         <aside className="col">
             <button className="btn">Hozzáadás</button>

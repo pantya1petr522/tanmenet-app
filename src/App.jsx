@@ -14,13 +14,16 @@ const App = () => {
 
       <Oraszam orakATanmenetben={orak.length} />
       <Temakorok/>
-      <OraForm/>
+      <hr />
+      <OraForm onOraHozzaad={(ora) => setOrak((prev) => [...prev, ora])}/>
       <section className="ora-grid">
-        {orak.map((ora) => (
+        {orak.map((ora, index) => (
           <OraCard
-            key={ora.oraSzam}
-            oraSzam={`${ora.oraSzam}. óra`}
+            key={index}
+            oraSzam={`${index + 1 }. óra`}
             cim={ora.cim}
+            onKartyaTorles={() => 
+              setOrak((prev) => prev.filter((ora, i) => i !== index))}
           >
             {ora.leiras}
           </OraCard>
